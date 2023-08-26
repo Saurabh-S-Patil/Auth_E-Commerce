@@ -1,0 +1,74 @@
+.maindiv{
+    margin: 20px;
+    display: flex;
+    /* border: 2px solid black; */
+    width: 100%;
+    height: 80%;
+}
+
+.imgdiv{
+    position: relative;
+    margin-bottom: 10px;
+    padding: 5px;
+    /* border: 2px solid black; */
+    border-radius: 5px;
+    height: 100%;
+    width: 35%;
+    background: url('https://ik.imagekit.io/major/images/51PuFBgBK4L._AC_UL640_FMwebp_QL65_.webp?updatedAt=1692689684780');
+}
+
+.itemdiv{
+    padding: 20px;
+    /* margin: 5px; */
+    margin-bottom: 10px;
+    /* border: 2px solid black; */
+    border-radius: 5px;
+    position: relative;
+    height: 100%;
+    width: 80%;
+}
+
+
+/* ----------------------------------------------------------------- */
+.h5{
+    display: flex;
+}
+.incdec{
+/* border: 2px solid black;     */
+border-top: 1px solid #D0D0D0;
+border-bottom: 1px solid #D0D0D0;
+display: flex;
+height: 30px;
+width: 100px;
+border-radius: 5px;
+} 
+
+.inc{
+    /* border: 2px solid black;     */
+    display: flex;
+    background-color: #D0D0D0;
+    /* height: 30px; */
+    width: 30px;
+    border-radius: 4px;
+    border-color: #D0D0D0;
+    }  
+
+    .mid{
+        /* border: 2px solid black;     */
+        display: flex;
+        /* height: 30px; */
+        width: 40px;
+        padding-left: 12px;
+        }
+    
+.dec{
+    background-color: #D0D0D0;
+    border-color: #D0D0D0;
+    border-radius: 4px;
+    /* border: 1px solid black;     */
+    display: flex;
+    /* height: 30px; */
+    width: 30px;
+    }  
+  /* ----------------------------------------------------------------- */
+
