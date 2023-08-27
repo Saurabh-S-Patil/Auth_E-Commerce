@@ -10,20 +10,30 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Cart extends BaseEntity {
     
+    @NotNull
     @OneToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // @OneToMany(mappedBy = "Cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    // private Set<CartProducts> productsList = new HashSet<>();
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<CartProducts> productsList = new HashSet<>();
+
+    private double totalAmmount;
 
     public User getUser() {
         return user;

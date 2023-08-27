@@ -9,9 +9,10 @@ import com.sunbeaminfo.entities.CartProducts;
 import com.sunbeaminfo.entities.Products;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -22,6 +23,8 @@ public class CartDTO {
     private String color;
     private Long userId;
     private Set<CartProducts> productsList = new HashSet<>();
+
+    private Set<ProductDTO> products;
 
     public Set<CartProducts> getProductsList() {
         return productsList;

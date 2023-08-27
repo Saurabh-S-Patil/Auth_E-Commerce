@@ -30,6 +30,7 @@
 package com.sunbeaminfo.service;
 
 import com.sunbeaminfo.DTO.CartDTO;
+import com.sunbeaminfo.DTO.CartProductResponse;
 import com.sunbeaminfo.DTO.ProductDTO;
 import com.sunbeaminfo.entities.Cart;
 import com.sunbeaminfo.entities.CartProducts;
@@ -50,10 +51,10 @@ public interface CartService {
 
     String deleteCart(Long cartId);
 
-    Set<CartProducts> getAllProductsInCart(Long userId);
+    CartProductResponse getAllProductsInCart(Long userId);
 
     // CartDTO addProductToCart(Long userId ,Long productId);
    
-    CartDTO removeProductFromCart(Long userId ,Long productId);
+    boolean removeProductFromCart(Long userId ,Long productId);
    
 }

@@ -82,6 +82,7 @@
 package com.sunbeaminfo.controller;
 
 import com.sunbeaminfo.DTO.CartDTO;
+import com.sunbeaminfo.DTO.CartProductResponse;
 import com.sunbeaminfo.DTO.ProductDTO;
 import com.sunbeaminfo.entities.Cart;
 import com.sunbeaminfo.entities.CartProducts;
@@ -108,12 +109,6 @@ public class CartController {
         this.cartService = cartService;
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<CartDTO>> getAllCarts() {
-//        List<CartDTO> carts = cartService.getAllCarts();
-//        return ResponseEntity.ok(carts);
-//    }
-
     @GetMapping("/{id}")
     public ResponseEntity<CartDTO> getCartById(@PathVariable Long id) {
         CartDTO cart = cartService.getCartById(id);
@@ -121,8 +116,8 @@ public class CartController {
     }
 
     @GetMapping("/{userId}/products")
-    public ResponseEntity<Set<CartProducts>> getAllProductsInCart(@PathVariable Long userId) {
-        Set<CartProducts> productsInCart = cartService.getAllProductsInCart(userId);
+    public ResponseEntity<CartProductResponse> getAllProductsInCart(@PathVariable Long userId) {
+        CartProductResponse productsInCart = cartService.getAllProductsInCart(userId);
         return ResponseEntity.ok(productsInCart);
     }
 
@@ -160,16 +155,20 @@ public class CartController {
     }
  
     @PostMapping("/{userId}/removeProduct/{productId}")
-    public ResponseEntity<String> removeProductToCart(
-            @PathVariable Long userId,
-            @PathVariable Long productId) {
+public ResponseEntity<String> removeProductToCart(
+        @PathVariable Long userId,
+        @PathVariable Long productId) {
 
-        try {
-            cartService.removeProductFromCart( userId,productId);
+    try {
+        if (cartService.removeProductFromCart(userId, productId)) {
             return ResponseEntity.ok("Product removed from cart successfully.");
-        } catch (EntityNotFoundException e) {
+        } else {
             return ResponseEntity.notFound().build();
         }
+    } catch (EntityNotFoundException e) {
+        return ResponseEntity.notFound().build();
     }
+}
+
    
 }

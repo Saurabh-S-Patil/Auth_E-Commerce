@@ -2,6 +2,7 @@ package com.sunbeaminfo.service;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,9 +29,6 @@ public class AuthenticationService {
     @Autowired
     private CartService cartService;
 
-    // @Autowired
-    // private RoleRepository roleRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -40,6 +38,10 @@ public class AuthenticationService {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private EmailService emailSender;
+
+    @Transactional
     public RegistrationResponseDTO registerUser(RegistrationDTO user){
         String email = user.getEmail();
         String first_name= user.getFirst_name();
@@ -48,21 +50,20 @@ public class AuthenticationService {
         long mob_no=user.getMob_no();
         String password = user.getPassword();
         String encodedPassword = passwordEncoder.encode(password);
-        //UserRoleEntity userRole = roleRepository.findByAuthority("USER").get();
         UserRoleEntity userRole1 = new UserRoleEntity();
         userRole1.setAuthority("USER");
         userRole1.setId(1);
         Set<UserRoleEntity> authorities = new HashSet<>();
-
         authorities.add(userRole1);
-
-       // return userRepository.save(new User(0, email, authorities, encodedPassword));
         User savedUser = userRepository.save(new User(null, first_name, last_name, email, encodedPassword, mob_no, gender, null, null, authorities, null, null, null, null, null));
         CartDTO cartDTO = new CartDTO();
         cartDTO.setUserId(savedUser.getId());
         cartService.createCart(cartDTO);
-
-        return new RegistrationResponseDTO(savedUser,"success");
+        RegistrationResponseDTO response = new RegistrationResponseDTO(savedUser, "success");
+        CompletableFuture.runAsync(() -> {
+            emailSender.sendMail(email, "Registration successfull!", "You have successfully registered to the E-commerce application.");
+        });
+        return response;
     }
 
     public LoginResponceDTO loginUser(String username, String password){

@@ -10,12 +10,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sunbeaminfo.entities.User;
 import com.sunbeaminfo.entities.UserRoleEntity;
 import com.sunbeaminfo.dao.UserRepository;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
