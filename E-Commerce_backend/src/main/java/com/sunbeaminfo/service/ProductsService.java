@@ -11,5 +11,6 @@ public interface ProductsService {
     Products createProduct(Products product);
     Products updateProduct(Long id, Products updatedProduct);
     void deleteProduct(Long id);
+    public List<Products> getProductsByCategory(String category);
 }
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.sunbeaminfo.dao.ProductsRepository;
 import com.sunbeaminfo.entities.Products;
+import com.sunbeaminfo.enums.Category;
 
 @Service
 public class ProductsServiceImpl implements ProductsService {
@@ -40,6 +41,12 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public void deleteProduct(Long id) {
         productsRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Products> getProductsByCategory(String categorieString){
+        Category category = Category.valueOf(categorieString);
+        return productsRepository.findByCategory(category);
     }
 }
 

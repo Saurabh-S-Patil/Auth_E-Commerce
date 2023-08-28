@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sunbeaminfo.DTO.LoginResponceDTO;
 import com.sunbeaminfo.DTO.RegistrationDTO;
 import com.sunbeaminfo.DTO.RegistrationResponseDTO;
-// import com.sunbeaminfo.entities.User;
 import com.sunbeaminfo.service.AuthenticationService;
 
 @RestController
